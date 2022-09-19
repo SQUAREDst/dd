@@ -3994,7 +3994,14 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.LocalStorage.Acts.SetItem,
 		C3.Plugins.Arr.Exps.AsJSON,
 		C3.Behaviors.DragnDrop.Cnds.OnDragStart,
-		C3.Behaviors.DragnDrop.Cnds.OnDrop
+		C3.Behaviors.DragnDrop.Cnds.OnDrop,
+		C3.Behaviors.Pin.Acts.Unpin,
+		C3.Behaviors.Tween.Acts.SetEnabled,
+		C3.Behaviors.DragnDrop.Acts.SetEnabled,
+		C3.Plugins.Sprite.Acts.MoveToTop,
+		C3.Plugins.Sprite.Cnds.CompareWidth,
+		C3.Plugins.Sprite.Cnds.CompareHeight,
+		C3.Plugins.System.Cnds.PickByComparison
 	];
 };
 self.C3_JsPropNameTable = [
@@ -4038,6 +4045,8 @@ self.C3_JsPropNameTable = [
 	{start_x: 0},
 	{DragDrop: 0},
 	{drag_items: 0},
+	{whith: 0},
+	{heith: 0},
 	{flower: 0},
 	{word_not: 0},
 	{everyday: 0},
@@ -4054,6 +4063,7 @@ self.C3_JsPropNameTable = [
 	{next_flower: 0},
 	{topic_words: 0},
 	{Sprite4: 0},
+	{back_button: 0},
 	{AJAX: 0},
 	{Browser: 0},
 	{check_words: 0},
@@ -4249,6 +4259,10 @@ self.C3_ExpressionFuncs = [
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			return () => (v0.GetValue() + 100);
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => (v0.GetValue() + 150);
 		},
 		p => {
 			const n0 = p._GetNode(0);
@@ -4594,7 +4608,19 @@ self.C3_ExpressionFuncs = [
 		p => {
 			const n0 = p._GetNode(0);
 			return () => (n0.ExpObject() + 10);
-		}
+		},
+		() => 408,
+		() => 241,
+		() => 263,
+		() => 267,
+		() => 256,
+		() => 355,
+		() => 0.01,
+		() => 526,
+		() => 76,
+		() => 95,
+		() => 91,
+		() => 0.12
 ];
 
 
