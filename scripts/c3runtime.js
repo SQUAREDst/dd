@@ -3903,15 +3903,17 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Sprite.Cnds.PickDistance,
 		C3.Plugins.Sprite.Exps.X,
 		C3.Plugins.Sprite.Exps.Height,
+		C3.Plugins.System.Cnds.Compare,
+		C3.Plugins.Sprite.Exps.Count,
 		C3.Plugins.System.Cnds.ForEachOrdered,
 		C3.Plugins.Sprite.Exps.Y,
 		C3.Plugins.System.Acts.SetVar,
+		C3.Plugins.Sprite.Acts.SetInstanceVar,
 		C3.Plugins.System.Cnds.PickAll,
+		C3.Plugins.Sprite.Cnds.CompareInstanceVar,
 		C3.Plugins.Browser.Acts.ConsoleLog,
 		C3.Plugins.System.Cnds.CompareBoolVar,
-		C3.Plugins.System.Cnds.Compare,
 		C3.Plugins.System.Acts.AddVar,
-		C3.Plugins.Sprite.Exps.Count,
 		C3.Plugins.System.Acts.WaitForPreviousActions,
 		C3.Behaviors.Tween.Cnds.OnTweensFinished,
 		C3.Plugins.Sprite.Acts.SetBoolInstanceVar,
@@ -3939,7 +3941,6 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.System.Cnds.While,
 		C3.Plugins.System.Exps.tokencount,
 		C3.Plugins.System.Cnds.Repeat,
-		C3.Plugins.Sprite.Cnds.CompareInstanceVar,
 		C3.Plugins.System.Exps.mid,
 		C3.Plugins.System.Exps.tokenat,
 		C3.Plugins.System.Cnds.PickNth,
@@ -3953,7 +3954,6 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.System.Exps.find,
 		C3.Plugins.Sprite.Acts.SetAnimFrame,
 		C3.Plugins.System.Acts.CreateObject,
-		C3.Plugins.Sprite.Acts.SetInstanceVar,
 		C3.Behaviors.Pin.Acts.PinByProperties,
 		C3.Plugins.Sprite.Exps.AnimationFrameCount,
 		C3.Plugins.System.Cnds.CompareVar,
@@ -3966,6 +3966,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Button.Cnds.OnClicked,
 		C3.Plugins.Button.Acts.Destroy,
 		C3.Plugins.System.Cnds.PickLastCreated,
+		C3.Behaviors.Tween.Acts.TweenTwoProperties,
 		C3.Plugins.System.Cnds.EveryTick,
 		C3.Plugins.Sprite.Acts.SetX,
 		C3.Plugins.System.Exps.max,
@@ -3974,7 +3975,6 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.System.Cnds.PickRandom,
 		C3.Plugins.Text.Acts.SetBoolInstanceVar,
 		C3.Plugins.Touch.Cnds.IsTouchingObject,
-		C3.Behaviors.Tween.Acts.TweenTwoProperties,
 		C3.Plugins.Sprite.Cnds.CompareOpacity,
 		C3.Plugins.Touch.Cnds.OnTapGestureObject,
 		C3.Plugins.Button.Cnds.IsBoolInstanceVarSet,
@@ -3994,7 +3994,14 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.LocalStorage.Acts.SetItem,
 		C3.Plugins.Arr.Exps.AsJSON,
 		C3.Behaviors.DragnDrop.Cnds.OnDragStart,
-		C3.Behaviors.DragnDrop.Cnds.OnDrop
+		C3.Behaviors.DragnDrop.Cnds.OnDrop,
+		C3.Behaviors.Pin.Acts.Unpin,
+		C3.Behaviors.Tween.Acts.SetEnabled,
+		C3.Behaviors.DragnDrop.Acts.SetEnabled,
+		C3.Plugins.Sprite.Acts.MoveToTop,
+		C3.Plugins.Sprite.Cnds.CompareWidth,
+		C3.Plugins.Sprite.Cnds.CompareHeight,
+		C3.Plugins.System.Cnds.PickByComparison
 	];
 };
 self.C3_JsPropNameTable = [
@@ -4010,6 +4017,8 @@ self.C3_JsPropNameTable = [
 	{selected_destrot: 0},
 	{x1: 0},
 	{used: 0},
+	{x_pos: 0},
+	{y_pos: 0},
 	{Sprite: 0},
 	{index_words: 0},
 	{index_laters: 0},
@@ -4030,7 +4039,6 @@ self.C3_JsPropNameTable = [
 	{vibr: 0},
 	{bg2: 0},
 	{out: 0},
-	{x_pos: 0},
 	{sound_ch: 0},
 	{vibr_cn: 0},
 	{back1: 0},
@@ -4038,6 +4046,8 @@ self.C3_JsPropNameTable = [
 	{start_x: 0},
 	{DragDrop: 0},
 	{drag_items: 0},
+	{whith: 0},
+	{heith: 0},
 	{flower: 0},
 	{word_not: 0},
 	{everyday: 0},
@@ -4054,6 +4064,7 @@ self.C3_JsPropNameTable = [
 	{next_flower: 0},
 	{topic_words: 0},
 	{Sprite4: 0},
+	{back_button: 0},
 	{AJAX: 0},
 	{Browser: 0},
 	{check_words: 0},
@@ -4073,7 +4084,6 @@ self.C3_JsPropNameTable = [
 	{lvl: 0},
 	{non: 0},
 	{on: 0},
-	{y_pos: 0},
 	{index: 0},
 	{en: 0},
 	{show: 0},
@@ -4249,6 +4259,10 @@ self.C3_ExpressionFuncs = [
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			return () => (v0.GetValue() + 100);
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => (v0.GetValue() + 150);
 		},
 		p => {
 			const n0 = p._GetNode(0);
@@ -4594,7 +4608,19 @@ self.C3_ExpressionFuncs = [
 		p => {
 			const n0 = p._GetNode(0);
 			return () => (n0.ExpObject() + 10);
-		}
+		},
+		() => 408,
+		() => 241,
+		() => 263,
+		() => 267,
+		() => 256,
+		() => 355,
+		() => 0.01,
+		() => 526,
+		() => 76,
+		() => 95,
+		() => 91,
+		() => 0.12
 ];
 
 
